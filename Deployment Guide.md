@@ -74,11 +74,7 @@ nano utils.py
 pip install python-dotenv
 ```
 
-### 🔑 API Keys
-1.**Serper API Key** (or other search APIs):
-  * Sign up at [Serper](https://serper.dev) to obtain an API key.
-  * Rename sample.env to .env
-  * Add the key to the .env file as SERPER_API_KEY.
+
 
 # Python Environment Configuration with Caching
 This repository provides a Python module utils.py for managing environment variables with caching, validation, and default configurations. It's designed to simplify handling environment-specific settings in your Python applications.
@@ -87,8 +83,10 @@ This repository provides a Python module utils.py for managing environment varia
 No installation is needed since this is just a single Python file. Simply place the utils.py (replace with the actual name of your script) in your project directory.
 
 **Environment Variable Files**
--In job-hunting-crew folder, rename samples.env to .env
-
+### 🔑 API Keys
+1.**Serper API Key** (or other search APIs):
+  * Sign up at [Serper](https://serper.dev) to obtain an API key.
+  * Rename sample.env to .env in job-hunting-crew folder
 ```bash
 mv sample.env .env
 ```
@@ -96,8 +94,10 @@ mv sample.env .env
 ```bash
 ls -a
 ```
+    
+  * Add the key to the .env file as SERPER_API_KEY.
 
--update the API keys in those files.
+https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 
 
 # Freeze dependencies
