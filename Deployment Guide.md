@@ -82,7 +82,7 @@ This repository provides a Python module utils.py for managing environment varia
 **Installation**
 No installation is needed since this is just a single Python file. Simply place the utils.py (replace with the actual name of your script) in your project directory.
 
-**Environment Variable Files**
+### Environment Variable Files
 ### 🔑 API Keys
 1.**Serper API Key** (or other search APIs):
   * Sign up at [Serper](https://serper.dev) to obtain an API key.
@@ -99,6 +99,109 @@ ls -a
 
 https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 
+### 🔧 AWS Configuration
+To use models on Amazon Bedrock, follow these steps:
+
+#### 1. Sign Up for an AWS Account (if you don’t have one)**
+* Create a [free-tier](https://aws.amazon.com/free/) AWS account at AWS Free Tier.
+* Ensure your account is fully activated before proceeding.
+#### 2. Install AWS CLI**
+* Download and install the [AWS Command Line Interface (CLI)](https://aws.amazon.com/cli/) from the AWS CLI Installation Guide.
+[AWS CLI user guide v2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+* To install the AWS CLI, run the following commands:
+
+```bash
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+```
+💡 Note: Please refer back to documentation for more details such as updating aws cli commands.
+
+* Verify the installation by running:
+```bash
+aws --version
+```
+
+#### ✅ 3. Step-by-Step: How to Get AWS Access Keys
+##### 1. Log in to AWS Console
+Go to https://aws.amazon.com/console and sign in with your AWS account.
+
+##### 2. Go to the IAM Management Console
+You can directly go here: https://console.aws.amazon.com/iam
+
+##### 3. Access the "Users" section
+* In the left sidebar, click on "Users".
+* Click on your username (or create a new user if you don’t have one).
+
+##### 4. Create Access Keys
+* Go to the "Security credentials" tab.
+* Scroll down to Access keys.
+* Click "Create access key".
+* Select use case: AWS CLI
+
+##### 5. Download or Copy Your Keys
+* You will see both:
+** Access Key ID
+** Secret Access Key
+
+* Important: Save the Secret Access Key somewhere secure. AWS will not show it again.
+
+#### 4. Configure AWS Credentials
+Run the following command to set up your AWS credentials:
+```bash
+aws configure
+```
+You will be prompted to enter:
+
+* **AWS Access Key ID**
+* **AWS Secret Access Key**
+* **Default AWS Region** (e.g., us-west-2)
+* **Output format** (default is json)
+When selecting a region, choose one where Amazon Bedrock models are available. You can check model availability across different AWS regions in the official documentation [Supported Models and Regions](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html). If models are available in multiple regions, select the one closest to you to minimize latency.
+
+💡 How to verify it worked?
+Run this command to check your current configured identity:
+```bash
+aws sts get-caller-identity
+```
+
+You should see JSON output showing your AWS account ID and ARN, confirming you’re authenticated.
+> If you find that your selected region does not have a variety of models, you can resolve issue
+
+🔁 Option 1: Run aws configure again to overwrite default
+If you're okay with just one active region at a time
+```bash
+aws configure
+```
+
+* Re-enter the region only (e.g., us-east-1)
+* Just press Enter when asked for Access Key ID and Secret Access Key to reuse existing ones
+* Output format? Press Enter for json or your previous value
+
+🔄 Option 2: Use named profiles (Recommended for multi-region setups)
+This lets you store multiple region settings, each with its own name:
+```bash
+aws configure --profile us-east
+```
+* Set Access Key ID
+* Set Secret Access Key
+* Set region to us-east-1
+Then to use it:
+```bash
+aws s3 ls --profile us-east
+```
+You can still keep your original Japan setup as the [default] profile.
+✅ This is ideal if you want to test different regions or switch often without redoing your config.
+
+How to Circumvent or Minimize Info Sharing
+1. Use Generic or Personal Info
+For company name, you can use your own name or a generic “Independent Developer” or “Personal Use”
+
+For URL, use a personal website or LinkedIn page, or a placeholder URL (like https://example.com)
+
+For Industry, pick the closest category or “Individual” / “Other”
+
+Many users do this successfully, especially if using the models for personal projects or prototyping.
 
 # Freeze dependencies
 pip freeze > requirements.txt
